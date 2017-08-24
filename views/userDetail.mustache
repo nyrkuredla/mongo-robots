@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  {{>_head}}
+  <body class="user-detail">
+    <div class="basic-info clearfix">
+      <img class="user-pic" src={{avatar}}>
+      <div class="user-contact detail">
+        <h1 class="name">{{name}}</h1>
+        <div class="user-info">
+          <div class="loc-job">
+            {{#job}}
+            <p>{{address.city}}, {{address.country}} | {{job}} {{company}}</p>
+            {{/job}}
+            {{^job}}
+            <p>{{address.city}}, {{address.country}} </p> | <p class="funemployed">Available for hire</p>
+            {{/job}}
+          </div>
+          <div class="contact">
+          <p>{{email}}  |  {{phone}}</p>
+        </div>
+        </div>
+      </div>
+    <div class="user-ed">
+      <div class="uni">
+        {{#university}}
+        <p>Education: {{university}}</p>
+        {{/university}}
+      </div>
+      <div class="skill-list">
+        <p>Skills:</p>
+        {{#skills}}
+        <ul>
+          <li>{{.}}</li>
+        </ul>
+        {{/skills}}
+      </div>
+    </div>
+  </body>
+</html>

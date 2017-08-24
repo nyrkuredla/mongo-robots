@@ -1,0 +1,14 @@
+<div class="user-container">
+  <img class="user-pic" src={{avatar}}>
+  <div class="user-contact">
+    <h2 class="name"><a href="/users/{{id}}">{{name}}</a></h2>
+  </div>
+  <div class="user-ed">
+    {{#job}}
+    <p>{{job}}, {{company}}</p>
+    {{/job}}
+    {{^job}}
+    <p class="funemployed">Available for hire</p>
+    {{/job}}
+  </div>
+</div>

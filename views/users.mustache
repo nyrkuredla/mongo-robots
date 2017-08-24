@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  {{>_head}}
+  <body>
+    <div class="user-main">
+      <p>Need an excellent robot? Click <a href="./funemployed">here</a>.</p>
+      <p>Want to see who's unavailable, for some reason? Okay, <a href="./workin">we can do that too</a>.</p>
+      {{#users}}
+        {{>_user}}
+      {{/users}}
+      {{^users}}
+          <p>Nobody here :(</p>
+      {{/users}}
+  </body>
+</html>
