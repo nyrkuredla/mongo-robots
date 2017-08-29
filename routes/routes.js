@@ -44,6 +44,37 @@ router
     }
   })
 
+  router
+    .route('/login')
+    .get(function (req, res) {
+      res.render('login')
+    })
+
+    //I set the password to equal the user's post code for the time being, to avoid having to reset all of them and to have one that's relatively easy to access through the console log.
+    .post(function (req, res) {
+      const sesh = req.session
+      const foundUsr = dal.getRobotByUsername(req.body.username)
+      console.log(foundUsr)
+      if (req.body.password === foundUsr.address.postal_code) {
+        req.session.usr = { name: foundUsr.name, id: foundUsr.address.postal_code }
+        let edit = ('/edit/' + foundUsr.address.postal_code)
+        console.log(edit)
+        res.redirect(edit)
+      } else {
+        res.send('HEY! No touching.')
+      }
+    })
+
+  router
+    .route('/logout')
+      .get(function (req, res) {
+      req.session.destroy()
+      res.redirect('/users')
+    })
+
+router
+    .route('/edit/:id')
+
 
 
   module.exports = router
