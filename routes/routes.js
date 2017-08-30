@@ -1,47 +1,47 @@
 const express = require('express')
 const router = express.Router()
-const dal = require('../dal')
+const { getAllRobots, getRobotById, getWorkinRobots, getFunemployedRobots, getRobotByUsername, addRobot, updateRobot } = require('../dal')
+const Robot = require('./models')
+const passport = require('passport')
 
 router
   .route('/')
   .get(function (req, res) {
-    console.log(dal.getPeople())
     res.render('home')
   })
 
 router
-  .route('/users')
+  .route('/robots')
   .get(function (req, res) {
-    //Fill in with users partial
-    const users = dal.getPeople();
-    res.render('users', { users: users });
+    //Fill in with robots partial
+    getAllRobots().then(function (robots) {
+      res.render('robots', {robots})
+    })
   })
 
 router
     .route('/funemployed')
     .get(function (req, res) {
-      const users = dal.getFunemployed();
-      console.log(users)
-      res.render('funemployed', {users: users})
+      getFunemployedRobots().then(function (robots) {
+      res.render('funemployed', {robots})
     })
+  })
 
 router
   .route('/workin')
   .get(function (req, res) {
-    const users = dal.getWorkin();
-    console.log(users)
-    res.render('workin', {users: users})
+    getWorkinRobots().then(function (robots) {
+    res.render('workin', {robots})
   })
+})
 
 router
-  .route('/users/:id')
+  .route('/robots/:id')
   .get(function (req, res) {
-    const chosenUser = dal.getOneRobot(req.params.id);
-    if (chosenUser) {
-      res.render('userDetail', chosenUser)
-    } else {
-      res.send("I mustache you a question. Hahaha! Get it? ...No, but seriously, you have to enter a correct user ID up there, or else I can't help you.")
-    }
+      getRobotById(req.params.id).then(function(chosenRobot) {
+      console.log(chosenRobot)
+      res.render('robotDetail', chosenRobot)
+    })
   })
 
   router
@@ -49,32 +49,53 @@ router
     .get(function (req, res) {
       res.render('login')
     })
-
-    //I set the password to equal the user's post code for the time being, to avoid having to reset all of them and to have one that's relatively easy to access through the console log.
+    //I set the password to equal the user's city for the time being, to avoid having to reset all of them and to have one that's relatively easy to access through the console log.
     .post(function (req, res) {
       const sesh = req.session
-      const foundUsr = dal.getRobotByUsername(req.body.username)
-      console.log(foundUsr)
-      if (req.body.password === foundUsr.address.postal_code) {
-        req.session.usr = { name: foundUsr.name, id: foundUsr.address.postal_code }
-        let edit = ('/edit/' + foundUsr.address.postal_code)
-        console.log(edit)
+      if (getRobotByUsername()) {
+      getRobotByUsername(req.body.username).then(function(foundUsr) {
+      if (req.body.password == foundUsr.address.city) {
+        req.session.usr = { name: foundUsr.name, id: foundUsr.id }
+        let edit = ('/edit/' + foundUsr.id)
         res.redirect(edit)
       } else {
-        res.send('HEY! No touching.')
+        res.render('no_touch')
       }
-    })
+        })
+      }
+      else {
+      res.send('Unsuccessful. Try again.')
+    }
+  })
 
   router
     .route('/logout')
       .get(function (req, res) {
       req.session.destroy()
-      res.redirect('/users')
+      res.redirect('/robots')
     })
 
 router
     .route('/edit/:id')
-
+    .get(function (req, res) {
+      if (req.isAuthenticated) {
+      const robotId = req.params.id
+      getRobotById(robotId).then(function (chosenRobot) {
+        res.render('edit', {robot: chosenRobot})
+      })
+      }
+      else {
+        res.render('no_touch')
+      }
+    })
+    .post(function (req, res) {
+      console.log(req.body)
+      const robotId = req.body.id
+      const robotNew = req.body
+      updateRobot(robotId, robotNew).then(function (robot) {
+        res.redirect('/robots')
+      })
+    })
 
 
   module.exports = router

@@ -2,6 +2,23 @@
 <html>
   {{>_head}}
   <body>
-    <p>editin lolol</p>
+    <h1>Edit robot</h1>
+    <form class="edit" action="/edit/{{id}}" method="POST">
+      <input type="text" name="id" value="{{id}}" placeholder={{id}} required readonly>
+      <input type="password" name="password" value="{{password}}" placeholder: "Password" required readonly>
+      <input type="text" name="name" value="{{name}}" placeholder="Name" required>
+      <input type="text" name="avatar" value="{{avatar}}" placeholder="Avatar">
+      <input type="text" name="university" value="{{university}}" placeholder="University">
+      <input type="text" name="job" value="{{job}}" placeholder="Job">
+      <input type="text" name="skill" value="{{skills}}" placeholder="Skills">
+      <input type="text" name="phone" value="{{phone}}" placeholder="Phone">
+      <input type="text" name="street_num" value="{{street_num}}" placeholder="Street number">
+      <input type="text" name="street_name" value="{{street_name}}" placeholder="Street name">
+      <input type="text" name="city" value="{{city}}" placeholder="City">
+      <input type="text" name="state_or_province" value="{{state_or_province}}" placeholder="State/Province">
+      <input type="text" name="postal_code" value="{{postal_code}}" placeholder="Postal code">
+      <input type="text" name="country" value="{{country}}" placeholder="Country">
+      <input type="submit" name="submit" value="Submit!">
+    </form>
   </body>
 </html>

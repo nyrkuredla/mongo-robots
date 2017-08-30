@@ -5,11 +5,11 @@
     <div class="user-main">
       <p>Need an excellent robot? Click <a href="./funemployed">here</a>.</p>
       <p>Want to see who's unavailable, for some reason? Okay, <a href="./workin">we can do that too</a>.</p>
-      {{#users}}
-        {{>_user}}
-      {{/users}}
-      {{^users}}
+      {{#robots}}
+        {{>_robot}}
+      {{/robots}}
+      {{^robots}}
           <p>Nobody here :(</p>
-      {{/users}}
+      {{/robots}}
   </body>
 </html>
