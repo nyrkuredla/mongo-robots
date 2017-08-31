@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const { getAllRobots, getRobotById, getWorkinRobots, getFunemployedRobots, getRobotByUsername, addRobot, updateRobot } = require('../dal')
-// const Robot = require('./models')
-// const passport = require('passport')
-// const { isAuthenticated } = require('./passport')
+const Robot = require('../models/Robot')
+const passport = require('passport')
+const { isAuthenticated } = require('../passport')
 
 router
   .route('/')
@@ -40,7 +40,6 @@ router
   .route('/robots/:id')
   .get(function (req, res) {
       getRobotById(req.params.id).then(function(chosenRobot) {
-      console.log(chosenRobot)
       res.render('robotDetail', chosenRobot)
     })
   })
@@ -50,24 +49,43 @@ router
     .get(function (req, res) {
       res.render('login')
     })
-    //I set the password to equal the user's city for the time being, to avoid having to reset all of them and to have one that's relatively easy to access through the console log. Newly created users should have their passwords verified as normal using the password field.
-    .post(function (req, res) {
-      const sesh = req.session
-      if (getRobotByUsername()) {
-      getRobotByUsername(req.body.username).then(function(foundUsr) {
-      if ((req.body.password == foundUsr.address.city) || (req.body.password == foundUsr.password)) {
-        req.session.usr = { name: foundUsr.name, id: foundUsr.id }
-        let edit = ('/edit/' + foundUsr.id)
-        res.redirect(edit)
-      } else {
-        res.render('no_touch')
+    .post((req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
+      if (err) {
+        return next(err)
       }
-        })
+      if (!user) {
+        return res.redirect('/login')
       }
-      else {
-      res.send('Unsuccessful. Try again.')
-    }
+      req.logIn(user, (err, obj) => {
+        if (err) {
+          return next(err)
+        }
+        res.send('logged in, yay!')
+      })
+    })(req, res, next)
   })
+
+
+    //I set the password to equal the user's city for the time being, to avoid having to reset all of them and to have one that's relatively easy to access through the console log. Newly created users should have their passwords verified as normal using the password field.
+
+  //   .post(function (req, res) {
+  //     const sesh = req.session
+  //     if (getRobotByUsername()) {
+  //     getRobotByUsername(req.body.username).then(function(foundUsr) {
+  //     if ((req.body.password == foundUsr.address.city) || (req.body.password == foundUsr.password)) {
+  //       req.session.usr = { name: foundUsr.name, id: foundUsr.id }
+  //       let edit = ('/edit/' + foundUsr.id)
+  //       res.redirect(edit)
+  //     } else {
+  //       res.render('no_touch')
+  //     }
+  //       })
+  //     }
+  //     else {
+  //     res.send('Unsuccessful. Try again.')
+  //   }
+  // })
 
   router
     .route('/logout')
