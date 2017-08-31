@@ -11,6 +11,7 @@ avatar: {type: String, required: true},
 university: String,
 job: String,
 skills: [String],
+email: String,
 phone: Number,
 address: {
   street_num: Number,
@@ -35,6 +36,13 @@ RobotSchema.pre('save', function (next){
     })
   })
 })
+
+RobotSchema.methods.comparePassword = function (pwd, dbPass, done) {
+  // pwd = plain text
+  bcrypt.compare(pwd, dbPass, (err, isMatch) => {
+    done(err, isMatch)
+  })
+}
 
 RobotSchema.statics.findByUsername = function (username, cb) {
   return this.find({username: username})

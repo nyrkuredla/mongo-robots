@@ -2,9 +2,11 @@
 <html>
   {{>_head}}
   <body>
-    <div class="user-main">
-      <p>Need an excellent robot? Click <a href="./funemployed">here</a>.</p>
-      <p>Want to see who's unavailable, for some reason? Okay, <a href="./workin">we can do that too</a>.</p>
+    <div class="container">
+      <h1>See All Robots</h1>
+      <p class="lead">Need to hire an excellent robot? Click <a href="./funemployed">here</a>.</p>
+      <p class="lead">Want to see who's unavailable, for some reason? Okay, <a href="./workin">we can do that too</a>.</p>
+      <p class="lead">Got a new robot for the collection? <a href="/add">Add one here.</a></p>
       {{#robots}}
         {{>_robot}}
       {{/robots}}

@@ -2,25 +2,27 @@
 <html>
   {{>_head}}
   <body>
-    <h1>Add robot</h1>
     <div class="container">
-      <form class="add" action="/add" method="POST">
-        <input type="text" name="username" value="" placeholder="Username" required>
-        <input type="text" name="id" value="" placeholder="ID" required>
-        <input type="text" name="password" value="" placeholder: "Password" required>
-        <input type="text" name="name" value="" placeholder="Name" required>
-        <input type="text" name="avatar" value="" placeholder="Avatar URL" required>
-        <input type="text" name="university" value="" placeholder="University">
-        <input type="text" name="job" value="" placeholder="Job">
-        <input type="text" name="skill" value="" placeholder="Skills">
-        <input type="text" name="phone" value="" placeholder="Phone">
-        <input type="text" name="address.street_num" value="" placeholder="Street number">
-        <input type="text" name="address.street_name" value="" placeholder="Street name">
-        <input type="text" name="address.city" value="" placeholder="City" required>
-        <input type="text" name="address.state_or_province" value="" placeholder="State/Province">
-        <input type="text" name="address.postal_code" value="" placeholder="Postal code">
-        <input type="text" name="address.country" value="" placeholder="Country" required>
-        <input type="submit" name="submit" value="Submit!">
+      <h1>Add robot</h1>
+      <form class="add form-group" action="/add" method="POST">
+        <input class="form-control" type="text" name="username" value="" placeholder="Username" required>
+        <input class="form-control" type="number" name="id" value="" placeholder="ID" required>
+        <input class="form-control" type="password" name="password" value="" placeholder="Password" required>
+        <input class="form-control" type="text" name="name" value="" placeholder="Name" required>
+        <input class="form-control" type="url" name="avatar" value="" placeholder="Avatar URL" required>
+        <input class="form-control" type="text" name="university" value="" placeholder="University">
+        <input class="form-control" type="text" name="job" value="" placeholder="Job">
+        <input class="form-control" type="text" name="company" value="" placeholder="Company">
+        <input class="form-control" type="text" name="skill" value="" placeholder="Skills">
+        <input class="form-control" type="tel" name="phone" value="" placeholder="Phone">
+        <input class="form-control" type="number" name="address.street_num" value="" placeholder="Street number">
+        <input class="form-control" type="text" name="address.street_name" value="" placeholder="Street name">
+        <input class="form-control" type="text" name="address.city" value="" placeholder="City" required>
+        <input class="form-control" type="text" name="address.state_or_province" value="" placeholder="State/Province">
+        <input class="form-control" type="text" name="address.postal_code" value="" placeholder="Postal code">
+        <input class="form-control" type="text" name="country" value="" placeholder="Country" required>
+        <button type="submit" class="btn btn-default">Submit</button>
+        <p>Just kidding, <a href="/robots">take me back to the collection.</a>
       </form>
     </div>
   </body>

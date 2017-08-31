@@ -3,11 +3,13 @@
   {{>_head}}
   <body class="login">
     <div class="container">
-      <p>Log in below to edit your details.</p>
-      <form class="login" action="/login" method="POST">
-        <input class="login" type="text" name="username" value="">
-        <input class="login" type="password" name="password" value="">
-        <input class="login submit" type="submit" name="submit" value="Log in!">
+      <form class="form-signin" action="/login" method="POST">
+        <h2 class="form-signin-heading">Sign in to edit your details.</h2>
+        <input class="login form-inline" type="text" name="username" value="" placeholder="Username">
+        <!-- Only new kittycat and pupper users have working passwords for now -->
+        <input class="login form-inline" type="password" name="password" value="" placeholder="Password">
+        <button class="btn btn-default btn-primary" type="submit">Sign in</button>
+        <p>No thanks, <a href="/robots">take me back to the collection.</a>
       </form>
     </div>
   </body>

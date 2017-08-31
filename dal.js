@@ -37,7 +37,7 @@ function addRobot (newRobot) {
     console.log(err)
   })
   console.log("Hooray! New robot added.")
-  return Promise.resolve("success")
+  // return Promise.resolve("success")
 }
 
 //updating collection using ID#

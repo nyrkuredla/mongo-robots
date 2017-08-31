@@ -1,0 +1,12 @@
+.user-container {
+  border: 1px solid grey;
+  margin: 10px;
+}
+
+h2.name {
+  font-size: 25px;
+}
+
+div.center {
+  margin: 0 auto;
+}

@@ -2,14 +2,14 @@
 <html>
   {{>_head}}
   <body class="user-detail">
-    <div class="basic-info clearfix">
+    <div class="col-md-8 center">
       <img class="user-pic" src={{avatar}}>
       <div class="user-contact detail">
         <h1 class="name">{{name}}</h1>
         <div class="user-info">
           <div class="loc-job">
             {{#job}}
-            <p>{{address.city}}, {{address.country}} | {{job}} {{company}}</p>
+            <p>{{address.city}} {{address.country}} | {{job}} {{company}}</p>
             {{/job}}
             {{^job}}
             <p>{{address.city}}, {{address.country}} </p> | <p class="funemployed">Available for hire</p>

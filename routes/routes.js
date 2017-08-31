@@ -55,7 +55,7 @@ router
       const sesh = req.session
       if (getRobotByUsername()) {
       getRobotByUsername(req.body.username).then(function(foundUsr) {
-      if (req.body.password == foundUsr.address.city) {
+      if ((req.body.password == foundUsr.address.city) || (req.body.password == foundUsr.password)) {
         req.session.usr = { name: foundUsr.name, id: foundUsr.id }
         let edit = ('/edit/' + foundUsr.id)
         res.redirect(edit)
@@ -83,9 +83,8 @@ router
   })
   .post(function (req, res) {
     const sesh = req.session;
-    console.log('req.body', req.body)
-    addRobot(req.body).then(function () {
-      res.redirect('/robots')
+    addRobot(req.body).then(function (robot) {
+      res.render('robots')
     })
   })
 
@@ -107,7 +106,7 @@ router
       const robotId = req.body.id
       const robotNew = req.body
       updateRobot(robotId, robotNew).then(function (robot) {
-        res.redirect('/robots')
+        res.redirect('/robots', success)
       })
     })
 

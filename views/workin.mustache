@@ -1,3 +1,16 @@
-{{#robots}}
-  {{>_robot}}
-{{/robots}}
+<!DOCTYPE html>
+<html>
+  {{>_head}}
+  <body>
+    <div class="container">
+      <h1>See Employed Robots</h1>
+      <p class="lead">Want to see who's unavailable? Okay, we guess! You're the boss! Click a robot to see their full profile.</p>
+      <p class="lead">Want to see everyone? <a href="./robots">Click here to go back</a>.</p>
+      {{#robots}}
+        {{>_robot}}
+      {{/robots}}
+      {{^robots}}
+          <p>Nobody here :(</p>
+      {{/robots}}
+  </body>
+</html>
