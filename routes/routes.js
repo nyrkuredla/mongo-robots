@@ -55,7 +55,7 @@ router
       const sesh = req.session
       if (getRobotByUsername()) {
       getRobotByUsername(req.body.username).then(function(foundUsr) {
-      if ((req.body.password == foundUsr.address.city) || (req.body.password == foundUsr.password)) {
+      if (req.body.password == foundUsr.address.city) {
         req.session.usr = { name: foundUsr.name, id: foundUsr.id }
         let edit = ('/edit/' + foundUsr.id)
         res.redirect(edit)
