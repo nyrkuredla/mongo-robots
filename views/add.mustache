@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  {{>_head}}
+  <body>
+    <h1>Add robot</h1>
+    <div class="container">
+      <form class="add" action="/add" method="POST">
+        <input type="text" name="username" value="" placeholder="Username" required>
+        <input type="text" name="id" value="" placeholder="ID" required>
+        <input type="text" name="password" value="" placeholder: "Password" required>
+        <input type="text" name="name" value="" placeholder="Name" required>
+        <input type="text" name="avatar" value="" placeholder="Avatar URL" required>
+        <input type="text" name="university" value="" placeholder="University">
+        <input type="text" name="job" value="" placeholder="Job">
+        <input type="text" name="skill" value="" placeholder="Skills">
+        <input type="text" name="phone" value="" placeholder="Phone">
+        <input type="text" name="street_num" value="" placeholder="Street number">
+        <input type="text" name="street_name" value="" placeholder="Street name">
+        <input type="text" name="city" value="" placeholder="City" required>
+        <input type="text" name="state_or_province" value="" placeholder="State/Province">
+        <input type="text" name="postal_code" value="" placeholder="Postal code">
+        <input type="text" name="country" value="" placeholder="Country" required>
+        <input type="submit" name="submit" value="Submit!">
+      </form>
+    </div>
+  </body>
+</html>

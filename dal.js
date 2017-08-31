@@ -32,8 +32,8 @@ function getWorkinRobots () {
 
 //adding new robot item to db
 function addRobot (newRobot) {
-  const robot = new Robot(newRobot)
-  Robots.save(function (err) {
+  const robot = new Robots(newRobot);
+  robot.save(function (err) {
     console.log(err)
   })
   console.log("Hooray! New robot added.")
@@ -42,7 +42,7 @@ function addRobot (newRobot) {
 
 //updating collection using ID#
 function updateRobot (robotID, robotNew) {
-  return Robots.findOneAndUpdate(robotId{ "id": robotID }, robotNew { upsert : false })
+  return Robots.findOneAndUpdate({ "_id": robotID }, robotNew, { upsert : false })
 }
 
 //exporting functions
