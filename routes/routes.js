@@ -52,6 +52,7 @@ router
     .post((req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
       if (err) {
+        console.log('err1, yo')
         return next(err)
       }
       if (!user) {
@@ -59,9 +60,10 @@ router
       }
       req.logIn(user, (err, obj) => {
         if (err) {
+          console.log('err2, yo')
           return next(err)
         }
-        res.send('logged in, yay!')
+        res.redirect('/edit')
       })
     })(req, res, next)
   })
@@ -107,24 +109,25 @@ router
   })
 
 router
-    .route('/edit/:id')
+    .route('/edit')
     .get(function (req, res) {
       if (req.isAuthenticated) {
-      const robotId = req.params.id
-      getRobotById(robotId).then(function (chosenRobot) {
+      const robotUsername = req.user.username
+      console.log(robotUsername)
+      getRobotByUsername(robotUsername).then(function (chosenRobot) {
         res.render('edit', {robot: chosenRobot})
       })
       }
       else {
+        console.log(req.user)
         res.render('no_touch')
       }
     })
     .post(function (req, res) {
-      console.log(req.body)
-      const robotId = req.body.id
+      const robotUsername = req.body.username
       const robotNew = req.body
-      updateRobot(robotId, robotNew).then(function (robot) {
-        res.redirect('/robots', success)
+      updateRobot(robotUsername, robotNew).then(function (robot) {
+        res.redirect('/robots')
       })
     })
 

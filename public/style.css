@@ -10,3 +10,43 @@ h2.name {
 div.center {
   margin: 0 auto;
 }
+
+/*user detail styles*/
+div.user-ed p {
+  font-family: sans-serif;
+  color: grey;
+  width: 90%;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+div.user-ed p.funemployed {
+  color: red;
+}
+
+p.funemployed {
+  color: red;
+  font-family: sans-serif;
+}
+
+div.basic-info {
+  padding: 2%;
+}
+
+img.user-pic {
+  height: 150px;
+  width: 150px;
+  margin: 20px;
+  border-radius: 100%;
+  border: 1px solid grey;
+  float: left;
+}
+
+div.user-contact {
+  padding: 2%;
+  clear: right;
+}
+
+div.skill-list {
+  margin-top: 2px;
+}

@@ -1,24 +1,28 @@
 const passport = require('passport')
 const { Strategy: LocalStrategy } = require('passport-local')
 const Robot = require('./models/Robot')
+const {
+  getAllRobots, getRobotById, getWorkinRobots, getFunemployedRobots, getRobotByUsername, addRobot, updateRobot
+} = require('./dal')
 
 passport.serializeUser((user, done) => {
   done(null, user.id)
 })
 
 passport.deserializeUser((id, done) => {
-  Robot.getRobotById(id, (err, user) => {
-    done(err, user)
-  })
-})
+  Robot.findOne({
+    id: id }, '-password -salt', function(err, user) {done(err, user);}
+  )}
+)
 
 // local strategy
 passport.use(new LocalStrategy((username, password, done) => {
-  Robot.findOne({ username: username.toLowerCase() }, '+password', (
+  Robot.findOne({ username: username }, '+password', (
     err,
     user
   ) => {
     if (err) {
+      console.log(err)
       return done(err)
     }
     if (!user) {
@@ -42,6 +46,6 @@ const isAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next()
   }
-  res.redirect('/login')
+  res.send("haha no")
 }
 module.exports = { isAuthenticated }

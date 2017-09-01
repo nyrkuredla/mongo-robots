@@ -38,8 +38,6 @@ RobotSchema.pre('save', function (next){
 })
 
 RobotSchema.methods.comparePassword = function (pwd, dbPass, done) {
-  console.log(pwd)
-  console.log(dbPass)
   // pwd = plain text
   bcrypt.compare(pwd, dbPass, (err, isMatch) => {
     done(err, isMatch)

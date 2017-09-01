@@ -40,9 +40,9 @@ function addRobot (newRobot) {
   // return Promise.resolve("success")
 }
 
-//updating collection using ID#
-function updateRobot (robotID, robotNew) {
-  return Robots.findOneAndUpdate({ "_id": robotID }, robotNew, { upsert : false })
+//updating collection using username
+function updateRobot (robotUsername, robotNew) {
+  return Robots.findOneAndUpdate({ "username": robotUsername }, robotNew, { upsert : false })
 }
 
 //exporting functions
